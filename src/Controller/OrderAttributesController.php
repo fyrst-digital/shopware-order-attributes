@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Fyrst\OrderAttributes\Controller;
 
 use Shopware\Core\Checkout\Cart\CartException;
+use Shopware\Core\Checkout\Cart\LineItem\LineItem;
 use Shopware\Core\Checkout\Cart\SalesChannel\CartService;
 use Shopware\Core\Framework\Log\Package;
 use Shopware\Core\System\SalesChannel\SalesChannelContext;
 use Shopware\Storefront\Controller\StorefrontController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -34,10 +34,9 @@ class OrderAttributesController extends StorefrontController
         $payload = $request->request->all('payload');
 
         if (!$lineItemId) {
-            return new JsonResponse([
-                'success' => false,
-                'error' => 'Missing lineItemId parameter',
-            ], Response::HTTP_BAD_REQUEST);
+            $this->addFlash(self::DANGER, $this->trans('error.message-default'));
+
+            return $this->createActionResponse($request);
         }
 
         try {
@@ -52,14 +51,19 @@ class OrderAttributesController extends StorefrontController
 
             $this->cartService->recalculate($cart, $context);
 
-            return new JsonResponse([
-                'success' => true,
-            ]);
+            return $this->renderOrderAttributesForm($lineItem);
         } catch (\Exception $e) {
-            return new JsonResponse([
-                'success' => false,
-                'error' => $e->getMessage(),
-            ], Response::HTTP_BAD_REQUEST);
+            $this->addFlash(self::DANGER, $this->trans('error.message-default'));
+
+            return $this->createActionResponse($request);
         }
+    }
+
+    private function renderOrderAttributesForm(LineItem $lineItem): Response
+    {
+        return $this->renderStorefront(
+            '@Storefront/storefront/component/line-item/order-attributes-form.html.twig',
+            ['lineItem' => $lineItem]
+        );
     }
 }

@@ -1,7 +1,8 @@
 {
     "fyrstOrderAttributes": {
         "commissionInput": {
-            "placeholder": "Kommission"
+            "placeholder": "Kommission",
+            "label": "Kommission"
         }
     }
 }
