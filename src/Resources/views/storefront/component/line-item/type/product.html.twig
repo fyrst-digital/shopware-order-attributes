@@ -1,0 +1,20 @@
+{% sw_extends '@Storefront/storefront/component/line-item/type/product.html.twig' %}
+
+{% block component_line_item_type_product_label %}
+    {{ parent() }}
+
+    <form action="{{ path('frontend.orderAttributes.add') }}" 
+          method="POST" 
+          id="orderAttributesForm-{{ lineItem.id }}"
+          data-order-attributes="true">
+        <input type="hidden" name="lineItemId" value="{{ lineItem.id }}">
+        <input type="text" 
+            name="payload[commission]" 
+            class="form-control"
+            placeholder="{{ 'fyrstOrderAttributes.commissionInput.placeholder' | trans }}"
+            value="{{ lineItem.payload.orderAttributes.commission | default('') }}">
+        <button type="submit" class="btn btn-primary">
+            {{ 'fyrstOrderAttributes.commissionInput.submit' | trans }}
+        </button>
+    </form>
+{% endblock %}

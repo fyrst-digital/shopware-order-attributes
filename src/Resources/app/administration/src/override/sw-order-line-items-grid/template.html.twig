@@ -1,0 +1,21 @@
+{% block sw_order_line_items_grid_column_payload_options %}
+    {% parent %}
+
+    <div v-if="item.customFields && item.customFields.orderAttributes && item.customFields.orderAttributes.commission" 
+        :style="{
+            flex: '1 100%',
+            backgroundColor: '#ffffff',
+            border: '1px solid var(--color-gray-300)',
+            borderRadius: 'var(--border-radius-md, 5px)',
+            padding: '8px 14px'
+        }">
+        <div :style="{
+            fontSize: '13px',
+            color: 'var(--color-darkgray-50)',
+            userSelect: 'none'
+        }">
+            {{$tc('fyrstOrderAttributes.commissionNote')}}: 
+        </div>
+        <span v-html="item.customFields.orderAttributes.commission" />
+    </div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{
+    "name": "fyrst/shopware-order-attributes",
+    "description": "Order Attributes",
+    "type": "shopware-platform-plugin",
+    "version": "0.1.0",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Fyrst\\OrderAttributes\\": "src/"
+        }
+    },
+    "require": {
+        "shopware/core": "^6.6",
+        "shopware/storefront": "^6.6"
+    },
+    "extra": {
+        "shopware-plugin-class": "Fyrst\\OrderAttributes\\OrderAttributes",
+        "label": {
+            "de-DE": "Bestellattribute",
+            "en-GB": "Order Attributes"
+        }
+    }
+}

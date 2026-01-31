@@ -1,0 +1,2 @@
+- The purpose of this shopware plugin is to give the shop user the possibility to add some attributes to the cart line items payload
+- If the user checkout the cart these line items payload must be saved in the according order
