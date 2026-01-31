@@ -5,10 +5,21 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+        <!-- Entity Definitions -->
+        <service id="Fyrst\OrderAttributes\Core\Content\OrderLineItemAttribute\OrderLineItemAttributeDefinition">
+            <tag name="shopware.entity.definition" entity="fyrst_order_line_item_attribute"/>
+        </service>
+
+        <service id="Fyrst\OrderAttributes\Core\Content\OrderLineItemAttribute\Aggregate\OrderLineItemAttributeTranslation\OrderLineItemAttributeTranslationDefinition">
+            <tag name="shopware.entity.definition" entity="fyrst_order_line_item_attribute_translation"/>
+        </service>
+
+        <!-- Subscribers -->
         <service id="Fyrst\OrderAttributes\Subscriber\Checkout">
             <tag name="kernel.event_subscriber"/>
         </service>
 
+        <!-- Controllers -->
         <service id="Fyrst\OrderAttributes\Controller\OrderAttributesController" public="true">
             <argument type="service" id="Shopware\Core\Checkout\Cart\SalesChannel\CartService"/>
             <call method="setContainer">
