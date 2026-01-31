@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Fyrst\OrderAttributes\Subscriber;
 
+use Fyrst\OrderAttributes\Constants;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Shopware\Core\Checkout\Cart\Event\CartLoadedEvent;
 use Shopware\Core\Checkout\Cart\Order\CartConvertedEvent;
@@ -40,8 +41,8 @@ class Checkout implements EventSubscriberInterface
         $lineItems = $cart->getLineItems();
 
         foreach ($lineItems as $lineItem) {
-            if (!$lineItem->hasPayloadValue('orderAttributes')) {
-                $lineItem->setPayloadValue('orderAttributes', []);
+            if (!$lineItem->hasPayloadValue(Constants::ORDER_ATTRIBUTES_KEY)) {
+                $lineItem->setPayloadValue(Constants::ORDER_ATTRIBUTES_KEY, []);
             }
         }
     }
@@ -64,11 +65,11 @@ class Checkout implements EventSubscriberInterface
 
             $originalLineItem = $cart->getLineItems()->get($lineItemId);
 
-            if (!$originalLineItem || !$originalLineItem->hasPayloadValue('orderAttributes')) {
+            if (!$originalLineItem || !$originalLineItem->hasPayloadValue(Constants::ORDER_ATTRIBUTES_KEY)) {
                 continue;
             }
 
-            $orderAttributes = $originalLineItem->getPayloadValue('orderAttributes');
+            $orderAttributes = $originalLineItem->getPayloadValue(Constants::ORDER_ATTRIBUTES_KEY);
 
             // Skip if orderAttributes is empty
             if (empty($orderAttributes)) {
@@ -80,11 +81,11 @@ class Checkout implements EventSubscriberInterface
 
             // Move to customFields and remove from payload
             $customFields = $convertedCart['lineItems'][$index]['customFields'] ?? [];
-            $customFields['orderAttributes'] = $orderAttributes;
+            $customFields[Constants::ORDER_ATTRIBUTES_KEY] = $orderAttributes;
             $convertedCart['lineItems'][$index]['customFields'] = $customFields;
 
             // Remove from payload to avoid duplication
-            unset($convertedCart['lineItems'][$index]['payload']['orderAttributes']);
+            unset($convertedCart['lineItems'][$index]['payload'][Constants::ORDER_ATTRIBUTES_KEY]);
         }
 
         $event->setConvertedCart($convertedCart);
