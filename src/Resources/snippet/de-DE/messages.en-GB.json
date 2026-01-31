@@ -1,0 +1,8 @@
+{
+    "fyrstOrderAttributes": {
+        "commissionInput": {
+            "placeholder": "Order / Commission number",
+            "label": "Commission"
+        }
+    }
+}

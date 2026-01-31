@@ -5,13 +5,14 @@
         ajaxContainerSelector: '.js-order-attributes-form-' ~ lineItem.id
     } %}
 
-    <div class="js-order-attributes-form-{{ lineItem.id }} order-attributes py-3">
+    <div class="js-order-attributes-form-{{ lineItem.id }} order-attributes">
         {% if lineItem.customFields.orderAttributes.commission %}
             {{lineItem.customFields.orderAttributes.commission}}  
         {% else %}
             <form action="{{ path('frontend.orderAttributes.add') }}" 
                 method="POST" 
                 id="orderAttributesForm-{{ lineItem.id }}"
+                class="py-3"
                 data-form-auto-submit="true"
                 data-form-auto-submit-options="{{ formAutoSubmitOptions|json_encode|e('html_attr') }}"
                 onsubmit="return false;">
