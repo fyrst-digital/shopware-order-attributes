@@ -16,12 +16,10 @@ export default Component.wrapComponentConfig({
 
     inject: [
         'repositoryFactory',
-        'customFieldDataProviderService'
     ],
 
     mixins: [
         'notification',
-        'discard-detail-page-changes'
     ],
 
     props: {

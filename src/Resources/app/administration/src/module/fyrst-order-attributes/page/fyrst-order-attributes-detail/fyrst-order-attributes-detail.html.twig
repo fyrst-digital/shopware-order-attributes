@@ -39,6 +39,7 @@
 
         {% block fyrst_order_attributes_detail_content %}
             <template #content>
+
                 <sw-card-view>
                     {% block fyrst_order_attributes_detail_card_general %}
                         <sw-card
@@ -46,6 +47,8 @@
                             :is-loading="isLoading"
                         >
                             {% block fyrst_order_attributes_detail_card_general_content %}
+                                <pre>{{ attribute }}</pre>
+
                                 <sw-container
                                     columns="repeat(auto-fit, minmax(250px, 1fr))"
                                     gap="0px 30px"
