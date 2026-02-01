@@ -1,6 +1,9 @@
 {
   "compilerOptions": {
-    "lib": ["ES2022", "DOM"],
+    "lib": [
+      "ES2022",
+      "DOM"
+    ],
     "esModuleInterop": true,
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
@@ -27,7 +30,9 @@
   },
   "include": [
     "./src/**/*",
-    "./types.d.ts"
+    "./src/types.d.ts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }

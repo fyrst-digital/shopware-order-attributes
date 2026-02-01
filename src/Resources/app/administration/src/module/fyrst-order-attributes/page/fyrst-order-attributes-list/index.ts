@@ -25,6 +25,7 @@ interface GridColumn {
 }
 
 export default Component.wrapComponentConfig({
+    // @ts-ignore
     template,
 
     inject: [
