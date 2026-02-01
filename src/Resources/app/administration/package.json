@@ -1,0 +1,16 @@
+{
+  "name": "@fyrst-order-attributes/administration",
+  "version": "1.0.0",
+  "description": "Order Attributes Administration",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@shopware-ag/entity-schema-types": "^6.9.0",
+    "@types/node": "^24.0.7"
+  }
+}

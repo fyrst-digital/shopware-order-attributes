@@ -1,0 +1,44 @@
+{
+  "fyrst-order-attributes": {
+    "moduleName": "Bestellattribute",
+    "moduleTitle": "Bestellattribute",
+    "moduleDescription": "Bestellpositionsattribute verwalten",
+    "navigationLabel": "Bestellpositionsattribute",
+    "list": {
+      "title": "Bestellattribute",
+      "description": "Attribute für Bestellpositionen verwalten.",
+      "buttonAdd": "Attribut hinzufügen",
+      "columnKey": "Schlüssel",
+      "columnLabel": "Bezeichnung",
+      "columnType": "Typ",
+      "columnPosition": "Position",
+      "columnActive": "Aktiv",
+      "columnRequired": "Erforderlich",
+      "contextMenuEdit": "Bearbeiten",
+      "contextMenuDelete": "Löschen",
+      "deleteConfirmTitle": "Attribut löschen?",
+      "deleteConfirmMessage": "Möchten Sie das Attribut \"{name}\" wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden."
+    },
+    "detail": {
+      "createTitle": "Attribut erstellen",
+      "editTitle": "Attribut bearbeiten",
+      "cardGeneral": "Allgemeine Einstellungen",
+      "labelKey": "Schlüssel",
+      "helpTextKey": "Eindeutiger Bezeichner für das Attribut. Kann nach der Erstellung nicht mehr geändert werden.",
+      "labelLabel": "Bezeichnung",
+      "helpTextLabel": "Anzeigebezeichnung für das Attribut.",
+      "labelPosition": "Position",
+      "helpTextPosition": "Sortierposition des Attributs.",
+      "labelActive": "Aktiv",
+      "helpTextActive": "Dieses Attribut aktivieren oder deaktivieren.",
+      "labelRequired": "Erforderlich",
+      "helpTextRequired": "Dieses Attribut für Kunden verpflichtend machen.",
+      "placeholderKey": "Schlüssel eingeben (z.B. kommissionsnummer)",
+      "placeholderLabel": "Bezeichnung eingeben (z.B. Kommissionsnummer)",
+      "buttonCancel": "Abbrechen",
+      "buttonSave": "Speichern",
+      "successCreate": "Attribut wurde erfolgreich erstellt.",
+      "successUpdate": "Attribut wurde erfolgreich aktualisiert."
+    }
+  }
+}
