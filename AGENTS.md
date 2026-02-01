@@ -2,6 +2,9 @@
 
 This is a **Shopware 6 Platform Plugin** that adds configurable order line item attributes functionality.
 
+## Bun as javascript runtime
+For the administration and storefront app we use `bun` as javascript runtime and package manager instead `npm`
+
 ## Build/Test Commands
 
 Since this is a Shopware plugin, use the host Shopware installation's tooling:

@@ -12,7 +12,6 @@ interface DetailComponentData {
 }
 
 export default Component.wrapComponentConfig({
-    // @ts-ignore
     template,
 
     inject: [
