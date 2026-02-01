@@ -11,7 +11,7 @@ interface DetailComponentData {
     isSaveSuccessful: boolean;
 }
 
-Component.register('fyrst-order-attributes-detail', {
+export default Component.wrapComponentConfig({
     template,
 
     inject: [

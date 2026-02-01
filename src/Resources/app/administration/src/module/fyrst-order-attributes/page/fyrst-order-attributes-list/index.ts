@@ -24,7 +24,7 @@ interface GridColumn {
     align?: 'left' | 'right' | 'center';
 }
 
-Component.register('fyrst-order-attributes-list', {
+export default Component.wrapComponentConfig({
     template,
 
     inject: [
