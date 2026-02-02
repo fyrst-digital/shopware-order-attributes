@@ -4,8 +4,6 @@
     {{ parent() }}
 
     {% block component_line_item_type_product_order_attributes %}
-        <div class="js-order-attributes-form-{{ lineItem.id }} order-attributes">
-            {% sw_include '@Storefront/storefront/component/line-item/order-attributes-form.html.twig' %}
-        </div>
+        {% sw_include '@Storefront/storefront/component/line-item/order-attributes-form.html.twig' %}
     {% endblock %}
 {% endblock %}

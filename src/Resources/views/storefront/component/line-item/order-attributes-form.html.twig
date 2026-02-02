@@ -1,10 +1,5 @@
 {% block component_order_attributes_line_item_form %}
 
-    {% set formAutoSubmitOptions = {
-        useAjax: true,
-        ajaxContainerSelector: '.js-order-attributes-form-' ~ lineItem.id
-    } %}
-
     {% if lineItem.customFields.orderAttributes.commission %}
         {{lineItem.customFields.orderAttributes.commission}}  
     {% else %}
@@ -12,8 +7,7 @@
             method="POST" 
             id="orderAttributesForm-{{ lineItem.id }}"
             class="py-3"
-            data-form-auto-submit="true"
-            data-form-auto-submit-options="{{ formAutoSubmitOptions|json_encode|e('html_attr') }}"
+            data-order-attributes="true"
             onsubmit="return false;">
             <input type="hidden" name="lineItemId" value="{{ lineItem.id }}">
             <input type="text" 
@@ -21,8 +15,7 @@
                 class="form-control"
                 placeholder="{{ 'fyrstOrderAttributes.commissionInput.placeholder' | trans }}"
                 value="{{ lineItem.payload.orderAttributes.commission | default('') }}"
-                data-focus-id="orderAttributes-commission-{{ lineItem.id }}"
-                onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur();}">
+                data-focus-id="orderAttributes-commission-{{ lineItem.id }}">
         </form>    
     {% endif %}
 {% endblock %}

@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Fyrst\OrderAttributes\Controller;
 
 use Shopware\Core\Checkout\Cart\CartException;
-use Shopware\Core\Checkout\Cart\LineItem\LineItem;
 use Shopware\Core\Checkout\Cart\SalesChannel\CartService;
 use Shopware\Core\Framework\Log\Package;
 use Shopware\Core\System\SalesChannel\SalesChannelContext;
 use Shopware\Storefront\Controller\StorefrontController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -34,9 +34,11 @@ class OrderAttributesController extends StorefrontController
         $payload = $request->request->all('payload');
 
         if (!$lineItemId) {
-            $this->addFlash(self::DANGER, $this->trans('error.message-default'));
-
-            return $this->createActionResponse($request);
+            return new JsonResponse([
+                'success' => false,
+                'error' => 'Missing lineItemId',
+                'data' => [],
+            ], 400);
         }
 
         try {
@@ -48,22 +50,18 @@ class OrderAttributesController extends StorefrontController
             }
 
             $lineItem->setPayloadValue('orderAttributes', $payload);
-
             $this->cartService->recalculate($cart, $context);
 
-            return $this->renderOrderAttributesForm($lineItem);
+            return new JsonResponse([
+                'success' => true,
+                'data' => $payload,
+            ]);
         } catch (\Exception $e) {
-            $this->addFlash(self::DANGER, $this->trans('error.message-default'));
-
-            return $this->createActionResponse($request);
+            return new JsonResponse([
+                'success' => false,
+                'error' => $e->getMessage(),
+                'data' => [],
+            ], 500);
         }
-    }
-
-    private function renderOrderAttributesForm(LineItem $lineItem): Response
-    {
-        return $this->renderStorefront(
-            '@Storefront/storefront/component/line-item/order-attributes-form.html.twig',
-            ['lineItem' => $lineItem]
-        );
     }
 }
