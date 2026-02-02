@@ -1,7 +1,9 @@
 {% block component_order_attributes_line_item_form %}
 
     {% if lineItem.customFields.orderAttributes.commission %}
-        {{lineItem.customFields.orderAttributes.commission}}  
+        <div>
+            {{lineItem.customFields.orderAttributes.commission}}  
+        </div>
     {% else %}
         <form action="{{ path('frontend.orderAttributes.add') }}" 
             method="POST" 
