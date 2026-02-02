@@ -1,2 +1,3 @@
 # build files
-src/Resources/public/administration
+# src/Resources/public/administration
+node_modules
