@@ -2,7 +2,7 @@
     "name": "fyrst/shopware-order-attributes",
     "description": "Order Attributes",
     "type": "shopware-platform-plugin",
-    "version": "0.1.0",
+    "version": "0.2.1",
     "license": "MIT",
     "autoload": {
         "psr-4": {

@@ -3,5 +3,7 @@
 {% block component_line_item_type_product_label %}
     {{ parent() }}
 
-    {% sw_include '@Storefront/storefront/component/line-item/order-attributes-form.html.twig' %}
+    {% block component_line_item_type_product_order_attributes %}
+        {% sw_include '@Storefront/storefront/component/line-item/order-attributes-form.html.twig' %}
+    {% endblock %}
 {% endblock %}
