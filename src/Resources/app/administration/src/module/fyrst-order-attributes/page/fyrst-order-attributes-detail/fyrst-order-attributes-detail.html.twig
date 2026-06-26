@@ -18,12 +18,12 @@
 
         {% block fyrst_order_attributes_detail_smart_bar_actions %}
             <template #smart-bar-actions>
-                <sw-button
+                <mt-button
                     :disabled="isLoading"
                     @click="onCancel"
                 >
                     {{ $tc('fyrst-order-attributes.detail.buttonCancel') }}
-                </sw-button>
+                </mt-button>
 
                 <sw-button-process
                     :is-loading="isLoading"
@@ -42,21 +42,19 @@
 
                 <sw-card-view>
                     {% block fyrst_order_attributes_detail_card_general %}
-                        <sw-card
+                        <mt-card
+                            position-identifier="fyrst-order-attributes-detail-general"
                             :title="$tc('fyrst-order-attributes.detail.cardGeneral')"
                             :is-loading="isLoading"
                         >
                             {% block fyrst_order_attributes_detail_card_general_content %}
-                                <pre>{{ attribute }}</pre>
-
                                 <sw-container
                                     columns="repeat(auto-fit, minmax(250px, 1fr))"
                                     gap="0px 30px"
                                 >
                                     {% block fyrst_order_attributes_detail_field_key %}
-                                        <sw-field
+                                        <mt-text-field
                                             v-model="attribute.key"
-                                            type="text"
                                             :disabled="isKeyReadOnly"
                                             :label="$tc('fyrst-order-attributes.detail.labelKey')"
                                             :help-text="$tc('fyrst-order-attributes.detail.helpTextKey')"
@@ -65,10 +63,20 @@
                                         />
                                     {% endblock %}
 
+                                    {% block fyrst_order_attributes_detail_field_type %}
+                                        <mt-select
+                                            v-model="attribute.type"
+                                            :disabled="!isNew"
+                                            :label="$tc('fyrst-order-attributes.detail.labelType')"
+                                            :help-text="$tc('fyrst-order-attributes.detail.helpTextType')"
+                                            :options="typeOptions"
+                                            validation="required"
+                                        />
+                                    {% endblock %}
+
                                     {% block fyrst_order_attributes_detail_field_label %}
-                                        <sw-field
+                                        <mt-text-field
                                             v-model="attribute.label"
-                                            type="text"
                                             :label="$tc('fyrst-order-attributes.detail.labelLabel')"
                                             :help-text="$tc('fyrst-order-attributes.detail.helpTextLabel')"
                                             :placeholder="$tc('fyrst-order-attributes.detail.placeholderLabel')"
@@ -76,9 +84,8 @@
                                     {% endblock %}
 
                                     {% block fyrst_order_attributes_detail_field_position %}
-                                        <sw-field
+                                        <mt-number-field
                                             v-model="attribute.position"
-                                            type="number"
                                             number-type="int"
                                             :label="$tc('fyrst-order-attributes.detail.labelPosition')"
                                             :help-text="$tc('fyrst-order-attributes.detail.helpTextPosition')"
@@ -92,7 +99,7 @@
                                     class="fyrst-order-attributes-detail__switches"
                                 >
                                     {% block fyrst_order_attributes_detail_field_active %}
-                                        <sw-switch-field
+                                        <mt-switch
                                             v-model="attribute.active"
                                             :label="$tc('fyrst-order-attributes.detail.labelActive')"
                                             :help-text="$tc('fyrst-order-attributes.detail.helpTextActive')"
@@ -101,7 +108,7 @@
                                     {% endblock %}
 
                                     {% block fyrst_order_attributes_detail_field_required %}
-                                        <sw-switch-field
+                                        <mt-switch
                                             v-model="attribute.required"
                                             :label="$tc('fyrst-order-attributes.detail.labelRequired')"
                                             :help-text="$tc('fyrst-order-attributes.detail.helpTextRequired')"
@@ -110,7 +117,7 @@
                                     {% endblock %}
                                 </sw-container>
                             {% endblock %}
-                        </sw-card>
+                        </mt-card>
                     {% endblock %}
                 </sw-card-view>
             </template>

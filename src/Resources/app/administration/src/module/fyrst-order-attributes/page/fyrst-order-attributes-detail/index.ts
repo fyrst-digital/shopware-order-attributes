@@ -59,6 +59,12 @@ export default Component.wrapComponentConfig({
 
         isKeyReadOnly(): boolean {
             return !this.isNew;
+        },
+
+        typeOptions() {
+            return [
+                { value: 'text', label: this.$tc('fyrst-order-attributes.detail.typeOptionText') }
+            ];
         }
     },
 

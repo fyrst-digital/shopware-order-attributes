@@ -1,0 +1,28 @@
+{
+  "base": "/bundles/orderattributes/administration/",
+  "entryPoints": {
+    "order-attributes": {
+      "css": [
+        "/bundles/orderattributes/administration/assets/order-attributes-ykvKSfZm.css"
+      ],
+      "dynamic": [
+        "/bundles/orderattributes/administration/assets/index-BH3qmqtY.js",
+        "/bundles/orderattributes/administration/assets/index-DWebACGH.js"
+      ],
+      "js": [
+        "/bundles/orderattributes/administration/assets/order-attributes-Cfijb2Ed.js"
+      ],
+      "legacy": false,
+      "preload": []
+    }
+  },
+  "legacy": false,
+  "metadatas": {},
+  "version": [
+    "7.1.0",
+    7,
+    1,
+    0
+  ],
+  "viteServer": null
+}
