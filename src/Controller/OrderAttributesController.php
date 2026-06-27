@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Fyrst\OrderAttributes\Controller;
 
+use Fyrst\OrderAttributes\Constants;
 use Shopware\Core\Checkout\Cart\CartException;
 use Shopware\Core\Checkout\Cart\SalesChannel\CartService;
 use Shopware\Core\Framework\Log\Package;
@@ -31,7 +32,7 @@ class OrderAttributesController extends StorefrontController
     public function add(Request $request, SalesChannelContext $context): Response
     {
         $lineItemId = $request->request->get('lineItemId');
-        $payload = $request->request->all('payload');
+        $payload = $request->request->all(Constants::ORDER_ATTRIBUTES_KEY);
 
         if (!$lineItemId) {
             return new JsonResponse([
@@ -49,7 +50,8 @@ class OrderAttributesController extends StorefrontController
                 throw CartException::lineItemNotFound($lineItemId);
             }
 
-            $lineItem->setPayloadValue('orderAttributes', $payload);
+            $lineItem->setPayloadValue(Constants::ORDER_ATTRIBUTES_KEY, $payload);
+
             $this->cartService->recalculate($cart, $context);
 
             return new JsonResponse([

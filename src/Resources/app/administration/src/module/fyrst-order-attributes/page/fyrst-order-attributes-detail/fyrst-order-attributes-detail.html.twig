@@ -1,0 +1,126 @@
+{% block fyrst_order_attributes_detail %}
+    <sw-page class="fyrst-order-attributes-detail">
+        {% block fyrst_order_attributes_detail_language_switch %}
+            <template #language-switch>
+                <sw-language-switch
+                    :save-changes-function="saveOnLanguageChange"
+                    :abort-change-function="abortOnLanguageChange"
+                    @on-change="onChangeLanguage"
+                />
+            </template>
+        {% endblock %}
+
+        {% block fyrst_order_attributes_detail_smart_bar_header %}
+            <template #smart-bar-header>
+                <h2>{{ identifier }}</h2>
+            </template>
+        {% endblock %}
+
+        {% block fyrst_order_attributes_detail_smart_bar_actions %}
+            <template #smart-bar-actions>
+                <mt-button
+                    :disabled="isLoading"
+                    @click="onCancel"
+                >
+                    {{ $tc('fyrst-order-attributes.detail.buttonCancel') }}
+                </mt-button>
+
+                <sw-button-process
+                    :is-loading="isLoading"
+                    :process-success="isSaveSuccessful"
+                    variant="primary"
+                    @process-finish="isSaveSuccessful = false"
+                    @click.prevent="onSave"
+                >
+                    {{ $tc('fyrst-order-attributes.detail.buttonSave') }}
+                </sw-button-process>
+            </template>
+        {% endblock %}
+
+        {% block fyrst_order_attributes_detail_content %}
+            <template #content>
+
+                <sw-card-view>
+                    {% block fyrst_order_attributes_detail_card_general %}
+                        <mt-card
+                            position-identifier="fyrst-order-attributes-detail-general"
+                            :title="$tc('fyrst-order-attributes.detail.cardGeneral')"
+                            :is-loading="isLoading"
+                        >
+                            {% block fyrst_order_attributes_detail_card_general_content %}
+                                <sw-container
+                                    columns="repeat(auto-fit, minmax(250px, 1fr))"
+                                    gap="0px 30px"
+                                >
+                                    {% block fyrst_order_attributes_detail_field_key %}
+                                        <mt-text-field
+                                            v-model="attribute.key"
+                                            :disabled="isKeyReadOnly"
+                                            :label="$tc('fyrst-order-attributes.detail.labelKey')"
+                                            :help-text="$tc('fyrst-order-attributes.detail.helpTextKey')"
+                                            :placeholder="$tc('fyrst-order-attributes.detail.placeholderKey')"
+                                            validation="required"
+                                        />
+                                    {% endblock %}
+
+                                    {% block fyrst_order_attributes_detail_field_type %}
+                                        <mt-select
+                                            v-model="attribute.type"
+                                            :disabled="!isNew"
+                                            :label="$tc('fyrst-order-attributes.detail.labelType')"
+                                            :help-text="$tc('fyrst-order-attributes.detail.helpTextType')"
+                                            :options="typeOptions"
+                                            validation="required"
+                                        />
+                                    {% endblock %}
+
+                                    {% block fyrst_order_attributes_detail_field_label %}
+                                        <mt-text-field
+                                            v-model="attribute.label"
+                                            :label="$tc('fyrst-order-attributes.detail.labelLabel')"
+                                            :help-text="$tc('fyrst-order-attributes.detail.helpTextLabel')"
+                                            :placeholder="$tc('fyrst-order-attributes.detail.placeholderLabel')"
+                                        />
+                                    {% endblock %}
+
+                                    {% block fyrst_order_attributes_detail_field_position %}
+                                        <mt-number-field
+                                            v-model="attribute.position"
+                                            number-type="int"
+                                            :label="$tc('fyrst-order-attributes.detail.labelPosition')"
+                                            :help-text="$tc('fyrst-order-attributes.detail.helpTextPosition')"
+                                        />
+                                    {% endblock %}
+                                </sw-container>
+
+                                <sw-container
+                                    columns="repeat(auto-fit, minmax(200px, 1fr))"
+                                    gap="0px 30px"
+                                    class="fyrst-order-attributes-detail__switches"
+                                >
+                                    {% block fyrst_order_attributes_detail_field_active %}
+                                        <mt-switch
+                                            v-model="attribute.active"
+                                            :label="$tc('fyrst-order-attributes.detail.labelActive')"
+                                            :help-text="$tc('fyrst-order-attributes.detail.helpTextActive')"
+                                            bordered
+                                        />
+                                    {% endblock %}
+
+                                    {% block fyrst_order_attributes_detail_field_required %}
+                                        <mt-switch
+                                            v-model="attribute.required"
+                                            :label="$tc('fyrst-order-attributes.detail.labelRequired')"
+                                            :help-text="$tc('fyrst-order-attributes.detail.helpTextRequired')"
+                                            bordered
+                                        />
+                                    {% endblock %}
+                                </sw-container>
+                            {% endblock %}
+                        </mt-card>
+                    {% endblock %}
+                </sw-card-view>
+            </template>
+        {% endblock %}
+    </sw-page>
+{% endblock %}

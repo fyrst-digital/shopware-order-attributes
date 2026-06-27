@@ -1,0 +1,27 @@
+{
+  "main.ts": {
+    "file": "assets/order-attributes-3a85q_pc.js",
+    "name": "order-attributes",
+    "src": "main.ts",
+    "isEntry": true,
+    "dynamicImports": [
+      "module/fyrst-order-attributes/page/fyrst-order-attributes-detail/index.ts",
+      "module/fyrst-order-attributes/page/fyrst-order-attributes-list/index.ts"
+    ],
+    "css": [
+      "assets/order-attributes-DyVeGSbJ.css"
+    ]
+  },
+  "module/fyrst-order-attributes/page/fyrst-order-attributes-detail/index.ts": {
+    "file": "assets/index-BH3qmqtY.js",
+    "name": "index",
+    "src": "module/fyrst-order-attributes/page/fyrst-order-attributes-detail/index.ts",
+    "isDynamicEntry": true
+  },
+  "module/fyrst-order-attributes/page/fyrst-order-attributes-list/index.ts": {
+    "file": "assets/index-DWebACGH.js",
+    "name": "index",
+    "src": "module/fyrst-order-attributes/page/fyrst-order-attributes-list/index.ts",
+    "isDynamicEntry": true
+  }
+}

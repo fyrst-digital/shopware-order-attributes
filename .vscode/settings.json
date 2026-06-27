@@ -1,0 +1,9 @@
+{
+	"intelephense.environment.includePaths": [
+		"../../../vendor"
+	],
+	"intelephense.files.exclude": [
+		"**/node_modules/**",
+		"**/var/cache/**"
+	]
+}

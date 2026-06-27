@@ -3,9 +3,9 @@ import Debouncer from 'src/helper/debouncer.helper';
 
 export default class OrderAttributesPlugin extends Plugin {
     init() {
-        this.inputs = this.el.querySelectorAll('input[name^="payload["]');
+        this.inputs = this.el.querySelectorAll('input[name^="orderAttributes["]');
         this.debouncedSubmit = Debouncer.debounce(this._submitForm.bind(this), 300);
-
+        console.log('meddl')
         this._registerEventListeners();
     }
 

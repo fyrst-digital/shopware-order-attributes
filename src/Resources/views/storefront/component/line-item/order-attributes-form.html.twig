@@ -1,6 +1,32 @@
-{% block component_order_attributes_line_item_form %}
+{% set orderAttributesItems = orderAttributesItems|default(page.extensions.orderAttributes.elements) %}
 
-    {% if lineItem.customFields.orderAttributes.commission %}
+{% block component_order_attributes_line_item_form %}
+    <form action="{{ path('frontend.orderAttributes.add') }}" 
+        method="POST" 
+        id="orderAttributesForm-{{ lineItem.id }}"
+        class="py-3"
+        data-order-lineitems-attributes="true"
+        onsubmit="return false;">
+        <input type="hidden" name="lineItemId" value="{{ lineItem.id }}">
+        {% block component_order_attributes_line_item_form_prepend %}{% endblock %}
+        {% for attributeItem in orderAttributesItems %}
+            {% block component_order_attributes_line_item_form_input %}
+                {% sw_include '@Storefront/storefront/component/form/form-input.html.twig' with {
+                    type: attributeItem.type,
+                    label: attributeItem.translated.label,
+                    id: 'order_lineitem_attribute_' ~ attributeItem.id,
+                    name: 'orderAttributes['~ attributeItem.key ~']',
+                    value: lineItem.payload.orderAttributes[attributeItem.key]|default(null),
+                    attributes: {
+                        'data-order-lineitems-attributes': 'input'
+                    },
+                    additionalClass: '',
+                } %}
+            {% endblock %}
+        {% endfor %}
+        {% block component_order_attributes_line_item_form_append %}{% endblock %}
+    </form>
+    {# {% if lineItem.customFields.orderAttributes.commission %}
         <div>
             {{lineItem.customFields.orderAttributes.commission}}  
         </div>
@@ -11,6 +37,7 @@
             class="py-3"
             data-order-attributes="true"
             onsubmit="return false;">
+            xx
             <input type="hidden" name="lineItemId" value="{{ lineItem.id }}">
             <input type="text" 
                 name="payload[commission]" 
@@ -19,6 +46,6 @@
                 value="{{ lineItem.payload.orderAttributes.commission | default('') }}"
                 data-focus-id="orderAttributes-commission-{{ lineItem.id }}">
         </form>    
-    {% endif %}
+    {% endif %} #}
 {% endblock %}
 

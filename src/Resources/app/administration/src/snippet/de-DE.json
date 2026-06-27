@@ -1,5 +1,12 @@
 {
     "fyrstOrderAttributes": {
-        "commissionNote": "Kommission"
+        "commissionNote": "Kommission",
+        "override": {
+            "tooltipCustomFields": "Diese Position hat benutzerdefinierte Feldattribute",
+            "contextMenuShowCustomFields": "Benutzerdefinierte Feldattribute anzeigen",
+            "modalTitleCustomAttributes": "Bestellattribute",
+            "tableHeaderName": "Name",
+            "tableHeaderValue": "Wert"
+        }
     }
 }

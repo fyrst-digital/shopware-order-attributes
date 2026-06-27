@@ -1,0 +1,47 @@
+{
+  "fyrst-order-attributes": {
+    "moduleName": "Order Attributes",
+    "moduleTitle": "Order Attributes",
+    "moduleDescription": "Manage order line item attributes",
+    "navigationLabel": "Order Line Item Attributes",
+    "list": {
+      "title": "Order Attributes",
+      "description": "Manage attributes for order line items.",
+      "buttonAdd": "Add attribute",
+      "columnKey": "Key",
+      "columnLabel": "Label",
+      "columnType": "Type",
+      "columnPosition": "Position",
+      "columnActive": "Active",
+      "columnRequired": "Required",
+      "contextMenuEdit": "Edit",
+      "contextMenuDelete": "Delete",
+      "deleteConfirmTitle": "Delete attribute?",
+      "deleteConfirmMessage": "Are you sure you want to delete the attribute \"{name}\"? This action cannot be undone."
+    },
+    "detail": {
+      "createTitle": "Create attribute",
+      "editTitle": "Edit attribute",
+      "cardGeneral": "General settings",
+      "labelKey": "Key",
+      "helpTextKey": "Unique identifier for the attribute. Cannot be changed after creation.",
+      "labelType": "Type",
+      "helpTextType": "The type of the attribute.",
+      "typeOptionText": "Text",
+      "labelLabel": "Label",
+      "helpTextLabel": "Display label for the attribute.",
+      "labelPosition": "Position",
+      "helpTextPosition": "Sorting position of the attribute.",
+      "labelActive": "Active",
+      "helpTextActive": "Enable or disable this attribute.",
+      "labelRequired": "Required",
+      "helpTextRequired": "Make this attribute mandatory for customers.",
+      "placeholderKey": "Enter key (e.g., commission_number)",
+      "placeholderLabel": "Enter label (e.g., Commission Number)",
+      "buttonCancel": "Cancel",
+      "buttonSave": "Save",
+      "successCreate": "Attribute has been created successfully.",
+      "successUpdate": "Attribute has been updated successfully."
+    }
+  }
+}

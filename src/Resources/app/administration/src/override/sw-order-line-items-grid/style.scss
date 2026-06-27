@@ -2,3 +2,44 @@
     flex-wrap: wrap;
     gap: 8px;
 }
+
+.fy-order-line-item-custom-field-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--font-size-xs, 12px);
+
+    thead {
+        tr {
+            border-bottom: 1px solid var(--color-gray-300, #d1d9e0);
+        }
+
+        td {
+            padding: 8px 12px;
+            font-weight: var(--font-weight-bold, 600);
+            color: var(--color-darkgray-70, #52667a);
+            text-transform: uppercase;
+            font-size: var(--font-size-3xs, 11px);
+            letter-spacing: 0.5px;
+        }
+    }
+
+    tbody {
+        tr {
+            border-bottom: 1px solid var(--color-gray-200, #e4e7eb);
+            transition: background-color 0.15s ease;
+
+            &:hover {
+                background-color: var(--color-gray-50, #f8f9fa);
+            }
+
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+
+        td {
+            padding: 10px 12px;
+            color: var(--color-darkgray-90, #2d3e50);
+        }
+    }
+}
