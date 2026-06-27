@@ -16,6 +16,7 @@
 
         <!-- Subscribers -->
         <service id="Fyrst\OrderAttributes\Subscriber\Checkout">
+            <argument type="service" id="fyrst_order_line_item_attribute.repository"/>
             <tag name="kernel.event_subscriber"/>
         </service>
 

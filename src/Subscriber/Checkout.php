@@ -5,27 +5,40 @@ declare(strict_types=1);
 namespace Fyrst\OrderAttributes\Subscriber;
 
 use Fyrst\OrderAttributes\Constants;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Shopware\Core\Checkout\Cart\Event\CartLoadedEvent;
 use Shopware\Core\Checkout\Cart\Order\CartConvertedEvent;
 use Shopware\Core\Checkout\Cart\Cart;
 use Shopware\Core\Checkout\Cart\LineItem\LineItemCollection;
 use Shopware\Core\Checkout\Cart\LineItem\LineItem;
+use Shopware\Core\Framework\DataAbstractionLayer\EntityRepository;
+use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
+use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\EqualsFilter;
+use Shopware\Core\Framework\DataAbstractionLayer\Search\Sorting\FieldSorting;
+use Shopware\Storefront\Page\Checkout\Cart\CheckoutCartPageLoadedEvent;
+use Shopware\Storefront\Page\Checkout\Offcanvas\OffcanvasCartPageLoadedEvent;
+use Shopware\Storefront\Page\PageLoadedEvent;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Checkout subscriber for order attributes.
- * 
+ *
  * Since cart LineItem only supports payload (not customFields), we store
  * orderAttributes in the cart payload, then move them to customFields
  * during cart-to-order conversion.
  */
 class Checkout implements EventSubscriberInterface
 {
+    public function __construct(
+        private readonly EntityRepository $repository,
+    ) {}
+
     public static function getSubscribedEvents(): array
     {
         return [
             CartLoadedEvent::class => 'onCartLoaded',
             CartConvertedEvent::class => 'onCartConverted',
+            CheckoutCartPageLoadedEvent::class => 'onCartPageLoaded',
+            OffcanvasCartPageLoadedEvent::class => 'onOffcanvasCartPageLoaded',
         ];
     }
 
@@ -81,14 +94,42 @@ class Checkout implements EventSubscriberInterface
 
             // Move to customFields and remove from payload
             $customFields = $convertedCart['lineItems'][$index]['customFields'] ?? [];
-            $customFields[Constants::ORDER_ATTRIBUTES_KEY] = $orderAttributes;
-            $convertedCart['lineItems'][$index]['customFields'] = $customFields;
+            $convertedCart['lineItems'][$index]['customFields'] = $this->setOrderAttributes($orderAttributes, $customFields);
 
             // Remove from payload to avoid duplication
             unset($convertedCart['lineItems'][$index]['payload'][Constants::ORDER_ATTRIBUTES_KEY]);
         }
 
         $event->setConvertedCart($convertedCart);
+    }
+
+    public function onCartPageLoaded(CheckoutCartPageLoadedEvent $event): void
+    {
+        $this->addOrderAttributesToPage($event);
+    }
+
+    public function onOffcanvasCartPageLoaded(OffcanvasCartPageLoadedEvent $event): void
+    {
+        $this->addOrderAttributesToPage($event);
+    }
+
+    private function setOrderAttributes(array $orderAttributes, mixed $customFields): mixed
+    {
+        foreach ($orderAttributes as $key => $value) {
+            $customFields[$key] = $value;
+        }
+        return $customFields;
+    }
+
+    private function addOrderAttributesToPage(PageLoadedEvent $event): void
+    {
+        $criteria = new Criteria();
+        $criteria->addFilter(new EqualsFilter('active', true));
+        $criteria->addSorting(new FieldSorting('position', FieldSorting::ASCENDING));
+
+        $searchResult = $this->repository->search($criteria, $event->getSalesChannelContext()->getContext());
+
+        $event->getPage()->addExtension('orderAttributes', $searchResult);
     }
 
     /**

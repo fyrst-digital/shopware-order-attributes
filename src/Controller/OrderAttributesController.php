@@ -32,7 +32,7 @@ class OrderAttributesController extends StorefrontController
     public function add(Request $request, SalesChannelContext $context): Response
     {
         $lineItemId = $request->request->get('lineItemId');
-        $payload = $request->request->all('payload');
+        $payload = $request->request->all(Constants::ORDER_ATTRIBUTES_KEY);
 
         if (!$lineItemId) {
             return new JsonResponse([
