@@ -1,6 +1,6 @@
 {
   "main.ts": {
-    "file": "assets/order-attributes-Cfijb2Ed.js",
+    "file": "assets/order-attributes-3a85q_pc.js",
     "name": "order-attributes",
     "src": "main.ts",
     "isEntry": true,
@@ -9,7 +9,7 @@
       "module/fyrst-order-attributes/page/fyrst-order-attributes-list/index.ts"
     ],
     "css": [
-      "assets/order-attributes-ykvKSfZm.css"
+      "assets/order-attributes-DyVeGSbJ.css"
     ]
   },
   "module/fyrst-order-attributes/page/fyrst-order-attributes-detail/index.ts": {

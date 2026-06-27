@@ -3,14 +3,14 @@
   "entryPoints": {
     "order-attributes": {
       "css": [
-        "/bundles/orderattributes/administration/assets/order-attributes-ykvKSfZm.css"
+        "/bundles/orderattributes/administration/assets/order-attributes-DyVeGSbJ.css"
       ],
       "dynamic": [
         "/bundles/orderattributes/administration/assets/index-BH3qmqtY.js",
         "/bundles/orderattributes/administration/assets/index-DWebACGH.js"
       ],
       "js": [
-        "/bundles/orderattributes/administration/assets/order-attributes-Cfijb2Ed.js"
+        "/bundles/orderattributes/administration/assets/order-attributes-3a85q_pc.js"
       ],
       "legacy": false,
       "preload": []
