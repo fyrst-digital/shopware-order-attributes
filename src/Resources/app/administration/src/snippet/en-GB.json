@@ -1,5 +1,12 @@
 {
     "fyrstOrderAttributes": {
-        "commissionNote": "Commission"
+        "commissionNote": "Commission",
+        "override": {
+            "tooltipCustomFields": "This position has custom fields attributes",
+            "contextMenuShowCustomFields": "Show custom fields attributes",
+            "modalTitleCustomAttributes": "Order attributes",
+            "tableHeaderName": "Name",
+            "tableHeaderValue": "Value"
+        }
     }
 }

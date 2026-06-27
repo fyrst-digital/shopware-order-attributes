@@ -49,22 +49,11 @@ Module.register('fyrst-order-attributes', {
             }
         }
     },
-    // navigation: [
-    //     {
-    //         id: 'fyrst-order-attributes',
-    //         label: 'fyrst-order-attributes.navigationLabel',
-    //         path: 'fyrst.order.attributes.list',
-    //         parent: 'sw-settings-extension',
-    //         privilege: 'fyrst_order_line_item_attribute.viewer',
-    //         position: 100
-    //     }
-    // ]
-    /** Module navigation in shopware settings */
     settingsItem: [
         {
             group: 'plugins',
             to: 'fyrst.order.attributes.list',
-            iconComponent: 'elysium-icon',
+            icon: 'regular-bars-square',
             label: 'fyrst-order-attributes.navigationLabel',
             privilege: 'fyrst_order_line_item_attribute.viewer',
         },
