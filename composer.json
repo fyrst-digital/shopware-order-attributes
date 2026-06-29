@@ -2,7 +2,7 @@
     "name": "fyrst/shopware-order-attributes",
     "description": "Order Attributes",
     "type": "shopware-platform-plugin",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "license": "MIT",
     "authors": [
         {
@@ -26,8 +26,8 @@
             "en-GB": "Order Attributes"
         },
         "description": {
-            "de-DE": "Konfigurierbare Bestellattribute als Zusatzfelder für Shopware.",
-            "en-GB": "Configurable order attributes as custom fields for Shopware."
+            "de-DE": "Konfigurierbare Bestellattribute als Zusatzfelder für Shopware. Bestellattribute lassen sich vom Shopbetreiber verwalten, vom Shopbesucher ausfüllen und in der Bestellung speichern.",
+            "en-GB": "Configurable order attributes as custom fields for Shopware. Order attributes can be managed by the shop operator, completed by the customer, and stored with the order."
         },
         "manufacturerLink": {
             "de-DE": "https://fyrst.dev",

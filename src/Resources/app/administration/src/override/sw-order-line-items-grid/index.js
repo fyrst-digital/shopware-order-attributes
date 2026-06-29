@@ -1,7 +1,7 @@
 import template from './template.html.twig'
 import './style.scss'
 
-const {Component, Data} = Shopware
+const {Component} = Shopware
 const {Criteria} = Shopware.Data;
 
 Component.override('sw-order-line-items-grid', {
@@ -25,7 +25,7 @@ Component.override('sw-order-line-items-grid', {
             return Object.keys(item.customFields ?? {}).length > 0;
         },
 
-        async showCustomFields(item, itemIndex) {
+        async showCustomFields(item) {
             this.showCustomFieldModal = item.id
             this.orderLineItemAttribute = await this.orderLineItemAttributeRepository.search(new Criteria())
         },
