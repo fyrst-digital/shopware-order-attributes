@@ -1,5 +1,6 @@
 {% block sw_order_line_items_grid_column_payload_options %}
-    <mt-icon 
+    <mt-icon
+        v-if="hasItemCustomFields(item)"
         name="regular-bars-square"
         :size="14"
         :style="{
@@ -7,7 +8,7 @@
         }"
         v-tooltip="{
             message: $tc('fyrstOrderAttributes.override.tooltipCustomFields')
-        }" 
+        }"
         @click="showCustomFields(item, itemIndex)" />
     {% parent %}
 {% endblock %}
