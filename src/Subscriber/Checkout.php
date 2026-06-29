@@ -15,6 +15,7 @@ use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\EqualsFilter;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Sorting\FieldSorting;
 use Shopware\Storefront\Page\Checkout\Cart\CheckoutCartPageLoadedEvent;
+use Shopware\Storefront\Page\Checkout\Confirm\CheckoutConfirmPageLoadedEvent;
 use Shopware\Storefront\Page\Checkout\Offcanvas\OffcanvasCartPageLoadedEvent;
 use Shopware\Storefront\Page\PageLoadedEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -37,8 +38,9 @@ class Checkout implements EventSubscriberInterface
         return [
             CartLoadedEvent::class => 'onCartLoaded',
             CartConvertedEvent::class => 'onCartConverted',
-            CheckoutCartPageLoadedEvent::class => 'onCartPageLoaded',
-            OffcanvasCartPageLoadedEvent::class => 'onOffcanvasCartPageLoaded',
+            CheckoutCartPageLoadedEvent::class => ['addOrderAttributesToPage', 0],
+            CheckoutConfirmPageLoadedEvent::class => ['addOrderAttributesToPage', 0],
+            OffcanvasCartPageLoadedEvent::class => ['addOrderAttributesToPage', 0],
         ];
     }
 
@@ -101,16 +103,6 @@ class Checkout implements EventSubscriberInterface
         }
 
         $event->setConvertedCart($convertedCart);
-    }
-
-    public function onCartPageLoaded(CheckoutCartPageLoadedEvent $event): void
-    {
-        $this->addOrderAttributesToPage($event);
-    }
-
-    public function onOffcanvasCartPageLoaded(OffcanvasCartPageLoadedEvent $event): void
-    {
-        $this->addOrderAttributesToPage($event);
     }
 
     private function setOrderAttributes(array $orderAttributes, mixed $customFields): mixed
