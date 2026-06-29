@@ -85,21 +85,21 @@ class Checkout implements EventSubscriberInterface
             }
 
             $orderAttributes = $originalLineItem->getPayloadValue(Constants::ORDER_ATTRIBUTES_KEY);
+            unset($convertedCart['lineItems'][$index]['payload'][Constants::ORDER_ATTRIBUTES_KEY]);
 
-            // Skip if orderAttributes is empty
+            if (!is_array($orderAttributes)) {
+                continue;
+            }
+
+            $orderAttributes = $this->removeEmptyValues($this->sanitizePayload($orderAttributes));
+
             if (empty($orderAttributes)) {
                 continue;
             }
 
-            // Sanitize values before storing
-            $orderAttributes = $this->sanitizePayload($orderAttributes);
-
             // Move to customFields and remove from payload
             $customFields = $convertedCart['lineItems'][$index]['customFields'] ?? [];
             $convertedCart['lineItems'][$index]['customFields'] = $this->setOrderAttributes($orderAttributes, $customFields);
-
-            // Remove from payload to avoid duplication
-            unset($convertedCart['lineItems'][$index]['payload'][Constants::ORDER_ATTRIBUTES_KEY]);
         }
 
         $event->setConvertedCart($convertedCart);
@@ -144,5 +144,32 @@ class Checkout implements EventSubscriberInterface
         }
 
         return $payload;
+    }
+
+    /**
+     * @param array<string, mixed> $payload
+     * @return array<string, mixed>
+     */
+    private function removeEmptyValues(array $payload): array
+    {
+        foreach ($payload as $key => $value) {
+            if (is_array($value)) {
+                $value = $this->removeEmptyValues($value);
+            }
+
+            if ($this->isEmptyValue($value)) {
+                unset($payload[$key]);
+                continue;
+            }
+
+            $payload[$key] = $value;
+        }
+
+        return $payload;
+    }
+
+    private function isEmptyValue(mixed $value): bool
+    {
+        return $value === null || $value === '' || (is_array($value) && empty($value));
     }
 }

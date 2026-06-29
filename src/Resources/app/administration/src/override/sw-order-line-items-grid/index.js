@@ -22,7 +22,13 @@ Component.override('sw-order-line-items-grid', {
 
     methods: {
         hasItemCustomFields(item) {
-            return Object.keys(item.customFields ?? {}).length > 0;
+            return Object.values(item.customFields ?? {}).some((value) => {
+                if (Array.isArray(value)) {
+                    return value.length > 0;
+                }
+
+                return value !== null && value !== undefined && value !== '';
+            });
         },
 
         async showCustomFields(item) {
