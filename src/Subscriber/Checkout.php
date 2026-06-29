@@ -113,7 +113,7 @@ class Checkout implements EventSubscriberInterface
         return $customFields;
     }
 
-    private function addOrderAttributesToPage(PageLoadedEvent $event): void
+    public function addOrderAttributesToPage(PageLoadedEvent $event): void
     {
         $criteria = new Criteria();
         $criteria->addFilter(new EqualsFilter('active', true));

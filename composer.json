@@ -4,6 +4,12 @@
     "type": "shopware-platform-plugin",
     "version": "1.0.0",
     "license": "MIT",
+    "authors": [
+        {
+            "name": "fyrst.dev",
+            "email": "robert@fyrst.digital"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "Fyrst\\OrderAttributes\\": "src/"
@@ -18,6 +24,18 @@
         "label": {
             "de-DE": "Bestellattribute",
             "en-GB": "Order Attributes"
+        },
+        "description": {
+            "de-DE": "Konfigurierbare Bestellattribute als Zusatzfelder für Shopware.",
+            "en-GB": "Configurable order attributes as custom fields for Shopware."
+        },
+        "manufacturerLink": {
+            "de-DE": "https://fyrst.dev",
+            "en-GB": "https://fyrst.dev"
+        },
+        "supportLink": {
+            "de-DE": "https://fyrst.dev",
+            "en-GB": "https://fyrst.dev"
         }
     }
 }
