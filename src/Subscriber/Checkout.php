@@ -21,8 +21,6 @@ use Shopware\Storefront\Page\PageLoadedEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
- * Checkout subscriber for order attributes.
- *
  * Since cart LineItem only supports payload (not customFields), we store
  * orderAttributes in the cart payload, then move them to customFields
  * during cart-to-order conversion.
@@ -44,10 +42,6 @@ class Checkout implements EventSubscriberInterface
         ];
     }
 
-    /**
-     * Initialize orderAttributes payload on cart line items if not present.
-     * This ensures the payload structure exists for the storefront forms.
-     */
     public function onCartLoaded(CartLoadedEvent $event): void
     {
         /** @var Cart $cart */
@@ -62,10 +56,6 @@ class Checkout implements EventSubscriberInterface
         }
     }
 
-    /**
-     * Move orderAttributes from payload to customFields during cart-to-order conversion.
-     * This stores the data in the order_line_item.custom_fields column instead of payload.
-     */
     public function onCartConverted(CartConvertedEvent $event): void
     {
         $cart = $event->getCart();
@@ -86,19 +76,15 @@ class Checkout implements EventSubscriberInterface
 
             $orderAttributes = $originalLineItem->getPayloadValue(Constants::ORDER_ATTRIBUTES_KEY);
 
-            // Skip if orderAttributes is empty
             if (empty($orderAttributes)) {
                 continue;
             }
 
-            // Sanitize values before storing
             $orderAttributes = $this->sanitizePayload($orderAttributes);
 
-            // Move to customFields and remove from payload
             $customFields = $convertedCart['lineItems'][$index]['customFields'] ?? [];
             $convertedCart['lineItems'][$index]['customFields'] = $this->setOrderAttributes($orderAttributes, $customFields);
 
-            // Remove from payload to avoid duplication
             unset($convertedCart['lineItems'][$index]['payload'][Constants::ORDER_ATTRIBUTES_KEY]);
         }
 
@@ -125,9 +111,6 @@ class Checkout implements EventSubscriberInterface
     }
 
     /**
-     * Sanitize payload values to prevent XSS attacks.
-     * Strips dangerous HTML tags while preserving safe formatting.
-     *
      * @param array<string, mixed> $payload
      * @return array<string, mixed>
      */
