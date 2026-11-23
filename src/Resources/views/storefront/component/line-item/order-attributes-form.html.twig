@@ -26,26 +26,5 @@
         {% endfor %}
         {% block component_order_attributes_line_item_form_append %}{% endblock %}
     </form>
-    {# {% if lineItem.customFields.orderAttributes.commission %}
-        <div>
-            {{lineItem.customFields.orderAttributes.commission}}  
-        </div>
-    {% else %}
-        <form action="{{ path('frontend.orderAttributes.add') }}" 
-            method="POST" 
-            id="orderAttributesForm-{{ lineItem.id }}"
-            class="py-3"
-            data-order-attributes="true"
-            onsubmit="return false;">
-            xx
-            <input type="hidden" name="lineItemId" value="{{ lineItem.id }}">
-            <input type="text" 
-                name="payload[commission]" 
-                class="form-control"
-                placeholder="{{ 'fyrstOrderAttributes.commissionInput.placeholder' | trans }}"
-                value="{{ lineItem.payload.orderAttributes.commission | default('') }}"
-                data-focus-id="orderAttributes-commission-{{ lineItem.id }}">
-        </form>    
-    {% endif %} #}
 {% endblock %}
 
