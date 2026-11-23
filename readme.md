@@ -84,7 +84,8 @@ During checkout, attribute values are transferred from the cart payload to the o
 | Admin module | `src/Resources/app/administration/src/module/fyrst-order-attributes/` |
 | Admin order grid override | `src/Resources/app/administration/src/override/sw-order-line-items-grid/` |
 | Storefront JS plugin | `src/Resources/app/storefront/src/order-attributes.js` |
-| Twig templates | `src/Resources/views/storefront/component/line-item/` |
+| Twig UX components | `src/Resources/views/components/LineItem/` |
+| Legacy Twig templates | `src/Resources/views/storefront/component/line-item/` |
 
 The subscriber hooks into four Shopware events:
 
@@ -95,7 +96,38 @@ The subscriber hooks into four Shopware events:
 
 ## Customisation
 
-The storefront form template exposes the following Twig blocks for extension:
+### Twig UX components
+
+The plugin ships anonymous Twig UX components in `src/Resources/views/components/` for consumers such as third-party
+themes (requires Shopware 6.7 with Twig UX component support). They are not used by the plugin itself, the default
+storefront keeps rendering the legacy templates below.
+
+| Component | Purpose |
+|---|---|
+| `OrderAttributes:LineItem:Form` | AJAX form with all order attribute inputs of a line item. Renders nothing without attributes. |
+| `OrderAttributes:LineItem:Input` | Single order attribute input (label, input, description). |
+
+```twig
+<twig:OrderAttributes:LineItem:Form
+    :lineItem="lineItem"
+    :orderAttributes="page.extensions.orderAttributes.elements|default([])"
+    class="mb-3"
+    field:input:class="shadow-none"
+/>
+```
+
+- **Form props:** `lineItem` (required), `orderAttributes`, `action`, `defaultBaseClasses`, `defaultVariants`
+- **Form blocks:** `prepend`, `content` (the inputs), `append`
+- **Form attributes:** root attributes go to the `<form>`, `field:*` attributes are passed to every input component
+- **Input props:** `orderAttribute` (required), `id`, `name`, `type`, `label`, `description`, `value`, `size`
+  (`default` | `sm` | `lg`, falls back to the attribute's input settings), `defaultBaseClasses`, `defaultInputClasses`,
+  `defaultVariants`, `inputVariants`
+- **Input blocks:** `label`, `input`, `description`
+- **Input attributes:** root attributes go to the wrapper, `label:*` and `input:*` to the nested elements
+
+### Legacy templates
+
+The legacy storefront form template exposes the following Twig blocks for extension:
 
 | Block | Purpose |
 |---|---|

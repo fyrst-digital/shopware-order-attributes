@@ -1,0 +1,73 @@
+{% props
+    orderAttribute,
+    id = null,
+    name = null,
+    type = null, # HTML input type, falls back to the attribute type
+    label = null,
+    description = null,
+    value = null,
+    size = null, # null | default | sm | lg, falls back to the attribute input settings
+    defaultBaseClasses = 'fyrst-order-attributes-field form-group',
+    defaultInputClasses = 'fyrst-order-attributes-field__input form-control',
+    defaultVariants = {},
+    inputVariants = {},
+%}
+
+{% set id = id ?? ('order-attributes-' ~ orderAttribute.id) %}
+{% set name = name ?? ('orderAttributes[' ~ orderAttribute.key ~ ']') %}
+{% set type = type ?? (orderAttribute.type|default('text')) %}
+{% set label = label ?? (orderAttribute.translated.label|default(orderAttribute.label)) %}
+{% set description = description ?? (orderAttribute.translated.description|default(orderAttribute.description)) %}
+{% set size = size ?? (orderAttribute.inputSettings.size|default('default')) %}
+{% set descriptionId = id ~ '-description' %}
+
+{% set rootCva = cva(defaultVariants|merge({ base: defaultBaseClasses })) %}
+{% set inputCva = cva({
+    variants: {
+        size: {
+            sm: 'form-control-sm',
+            lg: 'form-control-lg',
+        },
+    },
+}|merge(inputVariants)|merge({ base: defaultInputClasses })) %}
+
+<div
+    {{ attributes.without('class') }}
+    class="{{ rootCva.apply({}, attributes.render('class')) }}"
+>
+    {% block label %}
+        {% if label is not empty %}
+            {% set labelAttributes = attributes.nested('label') %}
+
+            <label
+                {{ labelAttributes.without('class').defaults({ for: id }) }}
+                class="{{ ['fyrst-order-attributes-field__label form-label', labelAttributes.render('class')]|join(' ')|trim }}"
+            >
+                {{ label|sw_sanitize }}
+            </label>
+        {% endif %}
+    {% endblock %}
+
+    {% block input %}
+        {% set inputAttributes = attributes.nested('input') %}
+
+        <input
+            {{ inputAttributes.without('class').defaults({
+                type: type,
+                id: id,
+                name: name,
+                value: value is not empty ? value : false,
+                'aria-describedby': description is not empty ? descriptionId : false,
+            }) }}
+            class="{{ inputCva.apply({ size: size }, inputAttributes.render('class')) }}"
+        >
+    {% endblock %}
+
+    {% block description %}
+        {% if description is not empty %}
+            <small id="{{ descriptionId }}" class="fyrst-order-attributes-field__description form-text">
+                {{ description|sw_sanitize }}
+            </small>
+        {% endif %}
+    {% endblock %}
+</div>

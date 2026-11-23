@@ -1,0 +1,41 @@
+{% props
+    lineItem,
+    orderAttributes = [],
+    action = path('frontend.orderAttributes.add'),
+    defaultBaseClasses = 'fyrst-order-attributes-form py-3',
+    defaultVariants = {},
+%}
+
+{% if orderAttributes is not empty %}
+    {% set rootCva = cva(defaultVariants|merge({ base: defaultBaseClasses })) %}
+    {% set lineItemValues = lineItem.payload.orderAttributes|default([]) %}
+
+    <form
+        {{ attributes.without('class').defaults({
+            id: 'orderAttributesForm-' ~ lineItem.id,
+            action: action,
+            method: 'POST',
+            onsubmit: 'return false;',
+            'data-order-lineitems-attributes': 'true',
+        }) }}
+        class="{{ rootCva.apply({}, attributes.render('class')) }}"
+    >
+        <input type="hidden" name="lineItemId" value="{{ lineItem.id }}">
+
+        {% block prepend %}{% endblock %}
+
+        {% block content %}
+            {% for orderAttribute in orderAttributes %}
+                <twig:OrderAttributes:LineItem:Input
+                    {{ ...attributes.nested('field').defaults({
+                        orderAttribute: orderAttribute,
+                        id: 'order-attributes-' ~ lineItem.id ~ '-' ~ orderAttribute.id,
+                        value: lineItemValues[orderAttribute.key]|default(null),
+                    }).all() }}
+                />
+            {% endfor %}
+        {% endblock %}
+
+        {% block append %}{% endblock %}
+    </form>
+{% endif %}

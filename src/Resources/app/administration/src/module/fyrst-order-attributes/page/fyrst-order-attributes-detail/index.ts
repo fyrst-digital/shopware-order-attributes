@@ -65,6 +65,32 @@ export default Component.wrapComponentConfig({
             return [
                 { value: 'text', label: this.$tc('fyrst-order-attributes.detail.typeOptionText') }
             ];
+        },
+
+        sizeOptions() {
+            return [
+                { value: 'default', label: this.$tc('fyrst-order-attributes.detail.sizeOptionDefault') },
+                { value: 'sm', label: this.$tc('fyrst-order-attributes.detail.sizeOptionSm') },
+                { value: 'lg', label: this.$tc('fyrst-order-attributes.detail.sizeOptionLg') }
+            ];
+        },
+
+        size: {
+            get(): string {
+                const size = this.attribute?.inputSettings?.size;
+
+                return typeof size === 'string' ? size : 'default';
+            },
+            set(value: string): void {
+                if (!this.attribute) {
+                    return;
+                }
+
+                this.attribute.inputSettings = {
+                    ...(this.attribute.inputSettings ?? {}),
+                    size: value
+                };
+            }
         }
     },
 
@@ -86,6 +112,7 @@ export default Component.wrapComponentConfig({
                 this.attribute.active = true;
                 this.attribute.required = false;
                 this.attribute.position = 0;
+                this.attribute.inputSettings = { size: 'default' };
             } else {
                 this.loadEntity();
             }

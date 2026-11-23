@@ -10,6 +10,9 @@
         <input type="hidden" name="lineItemId" value="{{ lineItem.id }}">
         {% block component_order_attributes_line_item_form_prepend %}{% endblock %}
         {% for attributeItem in orderAttributesItems %}
+            {% set attributeSize = attributeItem.inputSettings.size|default('default') %}
+            {% set attributeInputClass = attributeSize in ['sm', 'lg'] ? 'form-control-' ~ attributeSize : '' %}
+
             {% block component_order_attributes_line_item_form_input %}
                 {% sw_include '@Storefront/storefront/component/form/form-input.html.twig' with {
                     type: attributeItem.type,
@@ -21,6 +24,7 @@
                         'data-order-lineitems-attributes': 'input'
                     },
                     additionalClass: '',
+                    additionalInputClass: attributeInputClass,
                 } %}
             {% endblock %}
         {% endfor %}

@@ -91,6 +91,15 @@
                                             :help-text="$tc('fyrst-order-attributes.detail.helpTextPosition')"
                                         />
                                     {% endblock %}
+
+                                    {% block fyrst_order_attributes_detail_field_size %}
+                                        <mt-select
+                                            v-model="size"
+                                            :label="$tc('fyrst-order-attributes.detail.labelSize')"
+                                            :help-text="$tc('fyrst-order-attributes.detail.helpTextSize')"
+                                            :options="sizeOptions"
+                                        />
+                                    {% endblock %}
                                 </sw-container>
 
                                 <sw-container
