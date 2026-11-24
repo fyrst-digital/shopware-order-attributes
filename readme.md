@@ -5,7 +5,7 @@ Configurable per-line-item attributes for the cart and checkout flow.
 | | |
 |---|---|
 | **Package** | `fyrst/shopware-order-attributes` |
-| **Version** | 1.0.0 |
+| **Version** | 1.2.0 |
 | **Shopware** | ^6.6 |
 | **License** | MIT |
 
