@@ -1,3 +1,8 @@
+# 1.2.1
+
+**Changelog**
+- CSS-Klasse `order-attributes-form` zum Bestellattribute-Formular bei Warenkorb- und Offcanvas-Positionen hinzugefügt, um das Styling und die Theme-Anpassung zu erleichtern
+
 # 1.2.0
 
 **Changelog**

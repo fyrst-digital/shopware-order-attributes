@@ -1,3 +1,8 @@
+# 1.2.1
+
+**Changelog**
+- Added the `order-attributes-form` CSS class to the order attributes form on cart and offcanvas line items for easier styling and theme customization
+
 # 1.2.0
 
 **Changelog**

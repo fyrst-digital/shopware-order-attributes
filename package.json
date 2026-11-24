@@ -1,6 +1,6 @@
 {
   "name": "@fyrst-order-attributes/package",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Order Attributes Package",
   "scripts": {
     "lint:administration": "eslint --ext .ts,.vue src/Resources/app/administration/src",
