@@ -4,7 +4,7 @@
     <form action="{{ path('frontend.orderAttributes.add') }}" 
         method="POST" 
         id="orderAttributesForm-{{ lineItem.id }}"
-        class="py-3"
+        class="order-attributes-form py-3"
         data-order-lineitems-attributes="true"
         onsubmit="return false;">
         <input type="hidden" name="lineItemId" value="{{ lineItem.id }}">
